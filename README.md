@@ -46,6 +46,7 @@ val queryProvider = book.createQueryProvider(Book::class.java)
 That's it! You can now use your query provider!
 
 ### Examples
+##### Inserting
 ```kotlin
 queryProvider
     .insert()
@@ -58,6 +59,7 @@ Result:
 INSERT INTO books VALUES (?, ?, ?, ?)
 ```
 
+##### Updating
 ```kotlin
 queryProvider
     .update("author" to "J.K Rowling")
@@ -65,7 +67,7 @@ queryProvider
 ```
 Updates everything in table where author is equal to **J.K Rowling**.
 
-
+##### Table creation
 ```kotlin
 queryProvider
     .table()
@@ -78,6 +80,7 @@ Result:
 CREATE TABLE IF NOT EXIST books (author TEXT, boughtCopies INT, rating DOUBLE, title TEXT)
 ```
 
+##### Selecting
 ```kotlin
 queryProvider
     .builder()
