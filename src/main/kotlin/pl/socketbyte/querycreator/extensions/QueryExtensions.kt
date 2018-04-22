@@ -1,11 +1,9 @@
 package pl.socketbyte.querycreator.extensions
 
 import pl.socketbyte.querycreator.QueryBuilder
+import pl.socketbyte.querycreator.QueryProvider
 import java.sql.Connection
 
-/**
- * Create `QueryBuilder` class using `Connection`
- */
-fun <T> Connection.build(bind: Class<out T>): QueryBuilder<T> {
-    return QueryBuilder(bind)
+fun <T> T.createQueryProvider(bind: Class<out T>, connection: Connection? = null, connectionPool: Boolean = false): QueryProvider<T> {
+    return QueryProvider(this, bind, connection, connectionPool)
 }
