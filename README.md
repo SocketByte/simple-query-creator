@@ -44,6 +44,18 @@ You can also use extension:
 val queryProvider = book.createQueryProvider(Book::class.java)
 ```
 That's it! You can now use your query provider!
+#### Disclaimer
+You can use `QueryProvider` without giving the `connection` parameter.
+But! You cannot use any of `query()` or `execute()` features!
+To provide connection use this instead:
+
+```kotlin
+val queryProvider = book.createQueryProvider(Book::class.java, connection, isConnectionPool)
+```
+or
+```kotlin
+val queryProvider = QueryProvider<Book>(book, Book::class.java, connection, isConnectionPool)
+```
 
 ### Examples
 ##### Inserting
