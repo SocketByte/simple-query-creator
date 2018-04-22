@@ -52,24 +52,39 @@ queryProvider
     .execute()
 ```
 Creates an insert query and executes it with all replacements. :)
+
+Result:
+```
+INSERT INTO books VALUES (?, ?, ?, ?)
+```
+
 ```kotlin
 queryProvider
     .update("author" to "J.K Rowling")
     .execute()
 ```
 Updates everything in table where author is equal to **J.K Rowling**.
+
+
 ```kotlin
 queryProvider
     .table()
     .execute()
 ```
 Creates a table with `nullable` data.
+
+Result:
+```
+CREATE TABLE IF NOT EXIST books (author TEXT, boughtCopies INT, rating DOUBLE, title TEXT)
+```
+
 ```kotlin
 queryProvider
     .builder()
     .select()
     .from()
     .where("title" to "Harry Potter")
+    .query() // <- it will return ResultSet
 ```
 You can also use default builder class to make more advanced queries.
 Query above selects everything where title is equal to **Harry Potter**
@@ -81,6 +96,22 @@ queryProvider
     .select("rating")
     .from()
     .where("title" to "Harry Potter")
+    .query() // <- it will return ResultSet
+```
+You can of course make few conditions to `where`!
+```kotlin
+queryProvider
+    .builder()
+    .select()
+    .from()
+    .where("title" to "Harry Potter", "boughtCopies" to 39283)
+    .query() // <- it will return ResultSet
+```
+That will do the same as above, but will check also for `boughtCopies`!
+
+Result:
+```
+SELECT * FROM books WHERE title = ? AND boughtCopies = ?
 ```
 
 ### License
